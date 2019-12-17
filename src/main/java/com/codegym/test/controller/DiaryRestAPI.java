@@ -1,14 +1,9 @@
 package com.codegym.test.controller;
 
-//import com.codegym.test.message.request.SearchDiaryByTagAndTitle;
-//import com.codegym.test.message.request.SearchDiaryByTitleAndUserId;
 import com.codegym.test.message.request.SearchDiaryByTitleForm;
 import com.codegym.test.model.Diary;
 import com.codegym.test.service.IDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +19,6 @@ public class DiaryRestAPI {
 
     @Autowired
     private IDiaryService diaryService;
-
-//    @GetMapping("/diary/pagination")
-//    public ResponseEntity<?> getListDiaryAndPagination(@PageableDefault(value = 2) Pageable pageable) {
-//        Page<Diary> diaries =  diaryService.findAll(pageable);
-//
-//        if (diaries.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//
-//        return new ResponseEntity<>(diaries, HttpStatus.OK);
-//    }
 
     @GetMapping("/diary")
     public ResponseEntity<?> getListDiary() {
@@ -103,32 +87,6 @@ public class DiaryRestAPI {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-
-//    @PostMapping("/diary/searchBy-Title-And-UserId")
-//    public ResponseEntity<?> searchDiaryByTitle(@RequestBody SearchDiaryByTitleAndUserId searchDiaryByTitleAndUserId) {
-//        List<Diary> diaries;
-//        if(searchDiaryByTitleAndUserId.getTitle() == "") {
-//            diaries = (List<Diary>) diaryService.findAll();
-//            if(diaries.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//            return new ResponseEntity<>(diaries,HttpStatus.OK);
-//        }
-//        diaries = (List<Diary>) diaryService.findDiariesByTitleContainingAndUserId(searchDiaryByTitleAndUserId.getTitle(), searchDiaryByTitleAndUserId.getId());
-//        return new ResponseEntity<>(diaries,HttpStatus.OK);
-//    }
-
-    @GetMapping("/diary/searchBy-TagId/{id}")
-    public ResponseEntity<?> searchByTagId(@PathVariable Long id) {
-        List<Diary> diaries = (List<Diary>) diaryService.findDiariesByTagId(id);
-
-        if (diaries.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(diaries,HttpStatus.OK);
-    }
-
     @PostMapping("/diary/search-by-title")
     public ResponseEntity<?> getListDiaryByTitle(@RequestBody SearchDiaryByTitleForm titleForm) {
         if (titleForm.getTitle() == "" || titleForm.getTitle() == null ) {
@@ -149,40 +107,4 @@ public class DiaryRestAPI {
         }
     }
 
-//    @PostMapping("/diary/search-by-tag-and-title")
-//    public ResponseEntity<?> searchDiaryByTagAndTitle(@RequestBody SearchDiaryByTagAndTitle searchForm) {
-//        if (searchForm.getTitle() == null && searchForm.getTagId() == null) {
-//            List<Diary> diaries = (List<Diary>) diaryService.findAll();
-//            if(diaries.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//            return new ResponseEntity<>(diaries,HttpStatus.OK);
-//        }
-//
-//        if (searchForm.getTitle() == null && searchForm.getTagId() != null) {
-//            List<Diary> diaries = (List<Diary>) diaryService.findDiariesByTagId(searchForm.getTagId());
-//            if(diaries.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//            return new ResponseEntity<>(diaries,HttpStatus.OK);
-//        }
-//
-//        if (searchForm.getTitle() != null && searchForm.getTagId() == null) {
-//            List<Diary> diaries = (List<Diary>) diaryService.findDiariesByTitleContaining(searchForm.getTitle());
-//            if(diaries.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//            return new ResponseEntity<>(diaries,HttpStatus.OK);
-//        }
-//
-//        if (searchForm.getTagId() != null && searchForm.getTitle() != null) {
-//            List<Diary> diaries = (List<Diary>) diaryService.findDiariesByTagIdAndTitleContaining(searchForm.getTagId(),searchForm.getTitle());
-//            if(diaries.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//            return new ResponseEntity<>(diaries,HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 }

@@ -14,6 +14,4 @@ public interface IDiaryService {
     void delete(Long id);
 
     Iterable<Diary> findDiariesByTitleContaining(String title);
-
-    Iterable<Diary> findDiariesByTagId(Long tag_id);
 }

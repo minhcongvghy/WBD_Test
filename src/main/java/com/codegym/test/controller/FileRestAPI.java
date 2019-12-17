@@ -42,15 +42,6 @@ public class FileRestAPI {
         File convFile = convert(multipartFile);
         byte[] fileContent = FileUtils.readFileToByteArray(convFile);
         String encodedString = Base64.getEncoder().encodeToString(fileContent);
-//        String fileName = multipartFile.getOriginalFilename();
-//        String fileUpload = env.getProperty("file_upload").toString();
-//
-//        try {
-//            FileCopyUtils.copy(fileForm.getFile().getBytes(), new File(fileUpload + fileName));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
         Optional<Diary> diary = diaryService.findById(id);
         if(!diary.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

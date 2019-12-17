@@ -34,18 +34,9 @@ public class DiaryServiceImpl implements IDiaryService {
         repository.deleteById(id);
     }
 
-//    @Override
-//    public Iterable<Diary> findDiariesByTitleContaining(String title, Long id) {
-//        return repository.findDiariesByTitleContaining(title, id);
-//    }
-
     @Override
     public Iterable<Diary> findDiariesByTitleContaining(String title) {
         return repository.findDiariesByTitleContaining(title);
     }
 
-    @Override
-    public Iterable<Diary> findDiariesByTagId(Long tag_id) {
-        return repository.findDiariesByTagId(tag_id);
-    }
 }
